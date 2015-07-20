@@ -1,0 +1,88 @@
+function  [rho_neq,rho_neq_p] = doorway_fun(...
+          des_freq_u,H_exciton,supop_ge ,V_ge,V_eg) 
+
+
+%% Calculate to second order the density matrix before the probe beam hits
+%A density matrix associated to each path in Louiville space for
+%averaging purposes
+
+
+mid_freq = mean( des_freq_u );
+om_s = -1i*mid_freq ; %~frequency of oscillation to shift 
+N = length(V_ge);  %number of sites
+
+t_step = 2*pi/(des_freq_u(end)-des_freq_u(1)); %set by range
+t_end = 2*pi/(des_freq_u(2)-des_freq_u(1)); %set by frequency spacing
+t1_range = 0:t_step:t_end ;
+fft_sh = repmat(exp(om_s*t1_range),length(supop_ge),1);
+
+t_sep_rng_fs = 0:3000; %0 fs to  3 ps
+t_sep_rng = t_sep_rng_fs/1000*convfact; 
+
+%length of the ground + 1st excited manifold, range of time_seperations and
+%number of transitions
+rho_neq = zeros([sz2*N,sz2*N,length(t1_range),N,N]); %this ends up in the gs manifold
+rho_neq_p = zeros([sz2,sz2,length(t1_range),N,N]); %end in ex-state manifold
+
+rho_tau = zeros([sz2^2*N^2,length(t_sep_rng),length(pump_freq),N,N]);
+rho_tau_p = zeros([sz2^2,length(t_sep_rng),length(pump_freq),N,N]);
+
+for e1 = 1:N %first interation
+        
+    op1 = V_eg{e1}; 
+    temp1 = op1*rho_0; temp1 = temp1(sz2+1:sz2*(N+1),1:sz2);
+    temp1  = reshape(temp1,(numel(temp1)),1);    
+        
+    Gamma_s = real(R_red_sc(1,1+e1,1,1+e1)); %~coherence decay rate
+
+    %additional rescaling om_eg om_ge beyond om_s, om_s is simply the shift
+    %of the actual frequency range from the Fourier transform, this will
+    %need to be shifted
+    
+    om_shift = H_exciton(1+(1+e1)*sz2,1+(1+e1)*sz2)-H_exciton(1,1); 
+    om_eg =  om_shift;
+
+    num_scaling_eg = exp((1i*om_eg-Gamma_s)*t1_range); 
+    
+    %scale out oscillations and decay from electronic DOF
+    
+    supop_eg_scaled = supop_eg  + (1i*om_eg+Gamma_s)*sparse(eye(length(supop_eg)));
+     de_fn_eg_scaled  = @(t,v) supop_eg_scaled*v;   
+     
+    output_DE_fun(length(t1_range),temp1,'notsavingnayway'); 
+    options = odeset('OutputFcn',@output_DE_fun,'AbsTol',1e-15);
+
+    ode45(de_fn_eg_scaled,[0,t_end],temp1,options);
+
+    
+    [tmp1,tmp2]  =  output_DE_fun(length(t1_range),temp1,'get_data+clean');
+
+    %clean gets rid of empty points with no data
+    tmp3 = (interp1(tmp1,tmp2,t1_range).').*repmat(num_scaling_eg,length(temp1),1); 
+    %flip matrix so time is in dimension two
+    
+    %Fourier transform into frequency space, range will be around om_char(e1)
+    %I really want to do a laplace transform but only if it is analytic
+    tmp4 = fftshift(fft(tmp3.*fft_sh,[],2),2)/length(t1_range);
+        %reshape this to a matrix with 3rd dimension time
+    tmp4 = reshape(tmp4,sz2*N,sz2,length(t1_range));
+    
+    
+    for e2 = 1:N
+        
+        op_2 = V_ge{e2}; op_2 = op_2(1:sz2,sz2+1:sz2*(N+1)); 
+        %take only the important section
+        
+ rho_neq (:,:,:,e1,e2) = mtimesx(tmp4,op_2);        
+rho_neq_p (:,:,:,e1,e2) = mtimesx(op_2,tmp4); 
+            
+             
+    temp2  = rho_neq(:,:,:,e1,e2)+conj(permute(rho_neq(:,:,:,e1,e2),[2,1,3]));
+     %add complex conjugate from other half of the density matrix
+    temp2  = trapz(des_freq_u,temp2.*repmat(E_fct,size(temp2,1),size(temp2,2),1 ),3);
+            %prop these in time for selected frequencies to get the density
+            %matrix at any time step.  For shorter pulse seperations this
+            %will not be true  
+            
+    end
+end

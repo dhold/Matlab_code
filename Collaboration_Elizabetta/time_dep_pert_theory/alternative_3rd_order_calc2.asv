@@ -1,0 +1,190 @@
+% precompute dimer rot averages note R12 points along z
+Rsp = norm(R12);
+
+syms K1 K2 K3 real %magnitudes
+k1 = K1*kpu; k2 = K2*kpu; k3 = K3*kpr;
+
+av = sym(zeros(3,2,2,2,2)); %first interaction is conjugated
+%av_nr = sym(zeros(3,2,2,2,2)); %second interaction is conjugated
+av_FO = sym(zeros(3,2,2,2,2));  
+%first order terms in k1,k2,k3
+
+
+for ell = 1:2
+    for e3 = 1:2
+        for e2 = 1:2
+            for e1 = 1:2
+deltaRmat = -1i*[R(ell,:)- R(e1,:);R(ell,:)- R(e2,:);R(ell,:)- R(e3,:)].';          
+%mumat = [mu(ell,:);mu(e3,:);mu(e2,:);mu(e1,:)].';  
+mumat = [mu(e1,:);mu(e2,:);mu(e3,:);mu(ell,:)].';  
+for lp = 1:3 %dimension
+av(lp,ell,e3,e2,e1) = tensor_average(mumat,1,lp);  
+    for lp2=1:3
+    
+av_FO(lp,ell,e3,e2,e1) = av_FO(lp,ell,e3,e2,e1)+...
+                    tensor_average([mumat,deltaRmat(:,1)],lp,lp2)*k1(lp2)...
+                     + tensor_average([mumat,deltaRmat(:,2)],lp,lp2)*k2(lp2)...
+                     + tensor_average([mumat,deltaRmat(:,3)],lp,lp2)*k3(lp2); 
+                              
+                 
+    end                
+end
+            end
+        end
+    end
+end
+
+
+for e1= 1:2
+    temp = zeros(3);
+    temp(1,e1+1) = 1; 
+mu_op{e1} = ex_basis'*(temp+temp')*ex_basis; %project from site to exciton
+mu_op_R{e1} = (red_propop')*kron(mu_op{e1},eye(3))*red_propop; %time dep
+mu_op_L{e1} = (red_propop')*kron(eye(3),mu_op{e1})*red_propop;
+
+op0{e1} = subs(mu_op_L{e1},t,0);
+op1{e1} = subs(mu_op_L{e1},t,t1);
+op2{e1} = subs(mu_op_L{e1},t,t1+t2);
+op3{e1} = subs(mu_op_L{e1},t,t1+t2+t3); 
+
+end
+%IMPORTANT*** L is the operator action FROM the left, R is FROM the right****
+
+R1 = sym([0;0;0]); %both beams assumed to be polarized along x only
+R2 = sym([0;0;0]);   R3 = sym([0;0;0]);    R4 = sym([0;0;0]);
+R1fo = sym([0;0;0]); %both beams assumed to be polarized along x only
+R2fo = sym([0;0;0]);   R3fo = sym([0;0;0]);    R4fo = sym([0;0;0]);
+
+for ell = 1:2
+    for e3 = 1:2
+        for e2 = 1:2
+            for e1 = 1:2
+               
+  Rtmp1 = trace(reshape(op1{ell}*op2{e3}*op3{e2}*op0{e1}*rho0,3,3));
+  Rtmp2 = trace(reshape(op0{ell}*op2{e3}*op3{e2}*op1{e1}*rho0,3,3));              
+  Rtmp3 = trace(reshape(op0{ell}*op1{e3}*op3{e2}*op2{e1}*rho0,3,3));
+  Rtmp4 = trace(reshape(op3{ell}*op2{e3}*op1{e2}*op0{e1}*rho0,3,3)); 
+  
+  tmp = av(:,ell,e3,e2,e1); 
+  tmp2 = av_FO(:,ell,e3,e2,e1);
+ 
+  R1 = R1 +  tmp*Rtmp1;     R1fo = R1fo +  tmp2*Rtmp1;
+  R2 = R2 +  tmp*Rtmp2;     R2fo = R2fo +  tmp2*Rtmp2;
+  R3 = R3 +  tmp*Rtmp3;     R3fo = R3fo +  tmp2*Rtmp3;
+  R4 = R4 +  tmp*Rtmp4;     R4fo = R4fo +  tmp2*Rtmp4; 
+  
+            end
+        end
+    end
+end
+
+clear mu_op mu_op_R mu_op_L op0 op1 op2 op3
+
+
+S3 = R1-conj(R1) + R2-conj(R2) + R3-conj(R3) + R4-conj(R4);
+S3_FO = R1fo-conj(R1fo) + R2fo-conj(R2fo) + R3fo-conj(R3fo) + R4fo-conj(R4fo);
+
+%%
+
+   R1_ft = fourier(subs(R1(1),om_r,om3)*heaviside(t1),t1,om1);
+   R1_ft = fourier(R1_ft*heaviside(t2),t2,om1+om2);
+   R1_ft = -1i*fourier(R1_ft*heaviside(t3),t3,om1 + om2 + om3);
+
+   R1_ft_fo = fourier(subs(R1fo(2),om_r,om3)*heaviside(t1),t1,om1);
+   R1_ft_fo = fourier(R1_ft_fo*heaviside(t2),t2,om1+om2);
+   R1_ft_fo = -1i*fourier(R1_ft_fo*heaviside(t3),t3,om1 + om2 + om3); 
+   
+   R2_ft = fourier(subs(R2(1),om_r,om3)*heaviside(t1),t1,om1);
+   R2_ft = fourier(R2_ft*heaviside(t2),t2,om1+om2);
+   R2_ft = -1i*fourier(R2_ft*heaviside(t3),t3,om1 + om2 + om3);
+
+   R2_ft_fo = fourier(subs(R2fo(2),om_r,om3)*heaviside(t1),t1,om1);
+   R2_ft_fo = fourier(R2_ft_fo*heaviside(t2),t2,om1+om2);
+   R2_ft_fo = -1i*fourier(R2_ft_fo*heaviside(t3),t3,om1 + om2 + om3); 
+   
+   R3_ft = fourier(subs(R3(1),om_r,om3)*heaviside(t1),t1,om1);
+   R3_ft = fourier(R3_ft*heaviside(t2),t2,om1+om2);
+   R3_ft = -1i*fourier(R3_ft*heaviside(t3),t3,om1 + om2 + om3);
+
+   R3_ft_fo = fourier(subs(R3fo(2),om_r,om3)*heaviside(t1),t1,om1);
+   R3_ft_fo = fourier(R3_ft_fo*heaviside(t2),t2,om1+om2);
+   R3_ft_fo = -1i*fourier(R3_ft_fo*heaviside(t3),t3,om1 + om2 + om3); 
+   
+   R4_ft = fourier(subs(R4(1),om_r,om3)*heaviside(t1),t1,om1);
+   R4_ft = fourier(R4_ft*heaviside(t2),t2,om1+om2);
+   R4_ft = -1i*fourier(R4_ft*heaviside(t3),t3,om1 + om2 + om3);
+
+   R4_ft_fo = fourier(subs(R4fo(2),om_r,om3)*heaviside(t1),t1,om1);
+   R4_ft_fo = fourier(R4_ft_fo*heaviside(t2),t2,om1+om2);
+   R4_ft_fo = -1i*fourier(R4_ft_fo*heaviside(t3),t3,om1 + om2 + om3); 
+   
+   %%
+   
+   S3tilde = -(R1_ft + conj(subs(R1_ft,{om1,om2,om3},{-om1,-om2,-om3}))+...
+       R2_ft + conj(subs(R2_ft,{om1,om2,om3},{-om1,-om2,-om3}))+...
+       R3_ft + conj(subs(R3_ft,{om1,om2,om3},{-om1,-om2,-om3}))+...
+       R4_ft + conj(subs(R4_ft,{om1,om2,om3},{-om1,-om2,-om3})));
+  
+    S3tilde_fo = -(R1_ft_fo + conj(subs(R1_ft_fo,{om1,om2,om3},{-om1,-om2,-om3}))+...
+       R2_ft_fo + conj(subs(R2_ft_fo,{om1,om2,om3},{-om1,-om2,-om3}))+...
+       R3_ft_fo + conj(subs(R3_ft_fo,{om1,om2,om3},{-om1,-om2,-om3}))+...
+       R4_ft_fo + conj(subs(R4_ft_fo,{om1,om2,om3},{-om1,-om2,-om3})));
+   
+   %% Calculate third order polarization in x first
+syms om real
+   S3tilde2 = subs(S3tilde,{om3},{om-om1-om2});
+   S3tilde_fo_plus = subs(S3tilde_fo,{om3,K1,K2,K3},{om-om1-om2,...
+                    2*pi*(om-om1-om2),2*pi*(om2),-2*pi*(om1)});
+   S3tilde_fo_minus = subs(S3tilde_fo,{om3,K1,K2,K3},{om-om1-om2,...
+                    2*pi*(om-om1-om2),-2*pi*(om2),2*pi*(om1)});
+                
+  om_u_range = 1.2e3;
+   %range of pump wavelengths
+   numpoints = 300;
+   om_plot_rng = linspace(0.6e3,2e3,numpoints);
+   tsep_range = linspace(0.05,10,300)/convfact;
+   
+   tdelay_fc = exp(1i*t_sep*(om2+om1));
+    
+   quad_order= 13;   tau = tau_u;
+   
+  [omm, weig] = GaussHermite(quad_order,eps(20));
+  omm = omm*sqrt(2)/tau;
+  
+    prefact = 1/sqrt(pi)/tau; 
+    
+  sym_to_fn('temp_fn_x.m',vpa(S3tilde2*tdelay_fc,16),[om,om1,om2,om_u,t_sep])
+  sym_to_fn('temp_fn_y_plus.m',vpa(S3tilde_fo_plus*tdelay_fc,16),[om,om1,om2,om_u,t_sep])
+  sym_to_fn('temp_fn_y_minus.m',vpa(S3tilde_fo_minus*tdelay_fc,16),[om,om1,om2,om_u,t_sep])   
+    
+    P3x = zeros(length(om_plot_rng),length(tsep_range),length(om_u_range));
+    P3y = P3x;
+    
+ for lp = 1:length(tsep_range)
+          tsp = tsep_range(lp); 
+      for lp1 = 1:length(om_u_range)
+          omu = om_u_range(lp1);
+          temp1 = om_plot_rng*0; temp2 = temp1;
+      for lp2 = 1:quad_order
+          for lp3 = 1:quad_order
+              %solve with quadrature
+              weights = weig(lp2)*weig(lp3);
+%       temp1 = temp1 + weights*(temp_fn_x(om_plot_rng,omm(lp2)-omu,omm(lp3)+omu, omu,tsp)...
+%                      + temp_fn_x(om_plot_rng,omm(lp2)+omu,omm(lp3)-omu, omu,tsp));
+%        temp2 = temp2 + weights*(temp_fn_y_plus(om_plot_rng,omm(lp2)-omu,omm(lp3)+omu, omu,tsp)...
+%                      + temp_fn_y_minus(om_plot_rng,omm(lp2)+omu,omm(lp3)-omu, omu,tsp));                               
+      temp1 = temp1 + weights*(temp_fn_x(om_plot_rng,omm(lp2)+omu,omm(lp3)-omu, omu,tsp)...
+                     + temp_fn_x(om_plot_rng,omm(lp2)-omu,omm(lp3)+omu, omu,tsp));
+       temp2 = temp2 + weights*(temp_fn_y_plus(om_plot_rng,omm(lp2)-omu,omm(lp3)+omu, omu,tsp)...
+                     + temp_fn_y_minus(om_plot_rng,omm(lp2)+omu,omm(lp3)-omu, omu,tsp));                               
+                                  
+          end
+      end
+      P3x(:,lp,lp1) = (temp1.*om_plot_rng).';   
+      P3y(:,lp,lp1) = (temp2.*om_plot_rng).';   
+      end
+ end
+  %%
+    Dalpha_J  = -(8*pi^2)*real(P3x); %P(omega) = i S(omega)
+Deta_J  = (16*pi^2)*real(P3y); 
+Ddelta_J  = -(8*pi^2)*imag(P3y); 

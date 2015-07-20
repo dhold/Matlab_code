@@ -1,0 +1,438 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Correlation functions</TITLE>
+<META NAME="description" CONTENT="Correlation functions">
+<META NAME="keywords" CONTENT="phi_ug">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="phi_ug.css">
+
+<LINK REL="next" HREF="node5.html">
+<LINK REL="previous" HREF="node3.html">
+<LINK REL="up" HREF="node2.html">
+<LINK REL="next" HREF="node5.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html109"
+  HREF="node5.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.gif"></A> 
+<A NAME="tex2html105"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.gif"></A> 
+<A NAME="tex2html99"
+  HREF="node3.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.gif"></A> 
+<A NAME="tex2html107"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html110"
+  HREF="node5.html">Hierarchy equations of motion</A>
+<B> Up:</B> <A NAME="tex2html106"
+  HREF="node2.html">Introduction and theory</A>
+<B> Previous:</B> <A NAME="tex2html100"
+  HREF="node3.html">Modeling the quantum system</A>
+ &nbsp; <B>  <A NAME="tex2html108"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00022000000000000000">
+Correlation functions</A>
+</H2>
+The bath correlation functions <IMG
+ WIDTH="50" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img35.gif"
+ ALT="$C_{ab}(t)$"> determines how the environment fluctuations affect the system through the couplings <IMG
+ WIDTH="24" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.gif"
+ ALT="$F_a$">. The bath correlation functions are given as
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+C_{ab}(t) = \left< u_a(t)u_b(0)\right>_B = {\rm tr} _B\left\{u_a(t)u_b(0)\frac{ \exp \left(-\beta H_B\right)}{{\rm tr} _B\left\{\exp\left(-\beta H_B\right)\right\}}  \right\}.
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="473" HEIGHT="48" BORDER="0"
+ SRC="img36.gif"
+ ALT="\begin{displaymath}
+C_{ab}(t) = \left&lt; u_a(t)u_b(0)\right&gt;_B = {\rm tr} _B\left\...
+...rm tr} _B\left\{\exp\left(-\beta H_B\right)\right\}} \right\}.
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(10)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Here <IMG
+ WIDTH="42" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img37.gif"
+ ALT="$u_a(t)$"> evolve according to the interaction representation with respect to <IMG
+ WIDTH="39" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img4.gif"
+ ALT="$H_{SB}$"> and <IMG
+ WIDTH="68" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.gif"
+ ALT="$\beta=1/T$"> is the inverse temperature. The correlation function tells us how a perturbation of the environment caused by the coupling <IMG
+ WIDTH="24" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.gif"
+ ALT="$F_a$"> affects the system at a later time through the coupling <IMG
+ WIDTH="22" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img38.gif"
+ ALT="$F_b$">. The correlation functions are usually specified through the Fourier-Laplace transform of the spectral density <IMG
+ WIDTH="47" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img39.gif"
+ ALT="$J_a(\omega)$"> as
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+C_{ab}(t) =  \frac{1}{\pi} \int_0^{\infty} d\omega J_{ab}\left(\omega\right) \frac{e^{-i \omega t}}{1-e^{-\beta\hbar\omega}},
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="corrfcn1"></A><IMG
+ WIDTH="277" HEIGHT="49" BORDER="0"
+ SRC="img40.gif"
+ ALT="\begin{displaymath}
+C_{ab}(t) = \frac{1}{\pi} \int_0^{\infty} d\omega J_{ab}\left(\omega\right) \frac{e^{-i \omega t}}{1-e^{-\beta\hbar\omega}},
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(11)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where, 
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+J_{ab}(\omega) = \sum_\xi \frac{\pi}{2} \sum_{\xi} \frac{c_{a\xi} c_{b\xi}}{m_\xi \omega_\xi} \delta(\omega-\omega_\xi).
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="266" HEIGHT="52" BORDER="0"
+ SRC="img41.gif"
+ ALT="\begin{displaymath}
+J_{ab}(\omega) = \sum_\xi \frac{\pi}{2} \sum_{\xi} \frac{c_{a\xi} c_{b\xi}}{m_\xi \omega_\xi} \delta(\omega-\omega_\xi).
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(12)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+The HEOM arise by assuming a form of bath correlation functions given by
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+C_{ab}(t) = \sum_{k=0}^K c_{abk} e^{- \left(\nu_{abk}+i\Omega_{abk}\right) t}.
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="232" HEIGHT="62" BORDER="0"
+ SRC="img42.gif"
+ ALT="\begin{displaymath}
+C_{ab}(t) = \sum_{k=0}^K c_{abk} e^{- \left(\nu_{abk}+i\Omega_{abk}\right) t}.
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(13)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+The huge computational expense of such arbitrary correlation functions (especially with large M and K) restricts us to forms with <!-- MATH
+ $C_{ab}(t) = \delta_{ab} C_a(t)$
+ -->
+<IMG
+ WIDTH="135" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img43.gif"
+ ALT="$C_{ab}(t) = \delta_{ab} C_a(t)$"> and <!-- MATH
+ $\Omega_{abk}=0$
+ -->
+<IMG
+ WIDTH="70" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img44.gif"
+ ALT="$\Omega_{abk}=0$">. This gives the bath correlation functions as
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+C_a(t) = \sum_{k=0}^\infty c_{ak} e^{- \nu_{ak}t },
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><A NAME="corrfcn2"></A><IMG
+ WIDTH="162" HEIGHT="59" BORDER="0"
+ SRC="img45.gif"
+ ALT="\begin{displaymath}
+C_a(t) = \sum_{k=0}^\infty c_{ak} e^{- \nu_{ak}t },
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(14)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+which corresponds to spectral densities of the Drude form given by
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+J_a(\omega) = 2 \lambda_a\frac{ \omega\gamma_a } {\omega^2 + \gamma_a^2}.
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="157" HEIGHT="43" BORDER="0"
+ SRC="img46.gif"
+ ALT="\begin{displaymath}
+J_a(\omega) = 2 \lambda_a\frac{ \omega\gamma_a } {\omega^2 + \gamma_a^2}.
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(15)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+The Drude spectral density, and employing a Matsubara expansion of <!-- MATH
+ $1/({1-\exp({-\beta\hbar\omega}}))$
+ -->
+<IMG
+ WIDTH="151" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img47.gif"
+ ALT="$1/({1-\exp({-\beta\hbar\omega}}))$"> is Eq.&nbsp;<A HREF="#corrfcn1">11</A>, results in correlation function coefficients
+<BR>
+<DIV ALIGN="CENTER"><A NAME="coefficients"></A>
+<!-- MATH
+ \begin{eqnarray}
+c_{a0} &=& {\gamma_a \lambda_a}\left[ \cot (\beta \hbar \gamma_a/2) - i\right] \\
+c_{ak\ge1} &=& \frac{4 \lambda_a \gamma_a}{\beta \hbar} \frac{\nu_{ak}}{\nu_{ak}^2-\gamma_a^2}.
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="27" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img48.gif"
+ ALT="$\displaystyle c_{a0}$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.gif"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="171" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img50.gif"
+ ALT="$\displaystyle {\gamma_a \lambda_a}\left[ \cot (\beta \hbar \gamma_a/2) - i\right]$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(16)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="45" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img51.gif"
+ ALT="$\displaystyle c_{ak\ge1}$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.gif"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="124" HEIGHT="56" ALIGN="MIDDLE" BORDER="0"
+ SRC="img52.gif"
+ ALT="$\displaystyle \frac{4 \lambda_a \gamma_a}{\beta \hbar} \frac{\nu_{ak}}{\nu_{ak}^2-\gamma_a^2}.$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(17)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+and damping constants <!-- MATH
+ $\nu_{a0} = \gamma_a$
+ -->
+<IMG
+ WIDTH="68" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img53.gif"
+ ALT="$\nu_{a0} = \gamma_a$">, <!-- MATH
+ $\nu_{ak\ge1} = 2\pi k/\beta\hbar$
+ -->
+<IMG
+ WIDTH="127" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img54.gif"
+ ALT="$\nu_{ak\ge1} = 2\pi k/\beta\hbar$">. The infinite number of Matsubara terms <IMG
+ WIDTH="28" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img55.gif"
+ ALT="$\nu_{ak}$"> in Eq.&nbsp;<A HREF="#corrfcn2">14</A> is truncated to a finite <IMG
+ WIDTH="20" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img56.gif"
+ ALT="$K$"> where for all <IMG
+ WIDTH="53" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img57.gif"
+ ALT="$k&gt;K$">, <!-- MATH
+ $\nu_{ak}\exp(-\nu_{ak}t)\approx \delta(t)$
+ -->
+<IMG
+ WIDTH="167" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img58.gif"
+ ALT="$\nu_{ak}\exp(-\nu_{ak}t)\approx \delta(t)$">.
+
+<P>
+The parameters needed to model the system are summarized in Table&nbsp;<A HREF="#tbl:parameters">1</A>.
+<BR><P></P>
+<DIV ALIGN="CENTER">
+
+<DIV ALIGN="CENTER">
+<A NAME="173"></A>
+<TABLE CELLPADDING=3 BORDER="1">
+<CAPTION><STRONG>Table 1:</STRONG>
+Parameters defining model of quantum system</CAPTION>
+<TR><TD ALIGN="LEFT">Parameter</TD>
+<TD ALIGN="LEFT">Meaning</TD>
+<TD ALIGN="CENTER">Units</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="20" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img59.gif"
+ ALT="$N$"></TD>
+<TD ALIGN="LEFT">Number of states <!-- MATH
+ ${\left| i \right>}$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img6.gif"
+ ALT="${\left\vert i \right&gt;}$"></TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="23" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.gif"
+ ALT="$E_i$"></TD>
+<TD ALIGN="LEFT">Energy level of state <!-- MATH
+ ${\left| i \right>}$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img6.gif"
+ ALT="${\left\vert i \right&gt;}$"></TD>
+<TD ALIGN="CENTER">[Energy]</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="26" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img9.gif"
+ ALT="$V_{ij}$"></TD>
+<TD ALIGN="LEFT">Interaction between states <!-- MATH
+ ${\left| i \right>}$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img6.gif"
+ ALT="${\left\vert i \right&gt;}$"> and <!-- MATH
+ ${\left| j \right>}$
+ -->
+<IMG
+ WIDTH="24" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img60.gif"
+ ALT="${\left\vert j \right&gt;}$"></TD>
+<TD ALIGN="CENTER">[Energy]</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="23" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img61.gif"
+ ALT="$M$"></TD>
+<TD ALIGN="LEFT">Number of system-environment coupling terms</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="25" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img62.gif"
+ ALT="$f_{ai}$"></TD>
+<TD ALIGN="LEFT">Elements of <IMG
+ WIDTH="24" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.gif"
+ ALT="$F_a$"> specifying system-environment coupling</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="23" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img63.gif"
+ ALT="$\lambda_a$"></TD>
+<TD ALIGN="LEFT">Strength of coupling <IMG
+ WIDTH="24" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.gif"
+ ALT="$F_a$"></TD>
+<TD ALIGN="CENTER">[Energy]</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="21" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img64.gif"
+ ALT="$\gamma_a$"></TD>
+<TD ALIGN="LEFT">Response frequency of environment from <IMG
+ WIDTH="24" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.gif"
+ ALT="$F_a$"> coupling</TD>
+<TD ALIGN="CENTER">[time]<IMG
+ WIDTH="22" HEIGHT="20" ALIGN="BOTTOM" BORDER="0"
+ SRC="img65.gif"
+ ALT="$^{-1}$"></TD>
+</TR>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="20" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img56.gif"
+ ALT="$K$"></TD>
+<TD ALIGN="LEFT">Number of Matsubara terms to include</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+</TR>
+<TR><TD ALIGN="LEFT"><IMG
+ WIDTH="27" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img66.gif"
+ ALT="$L_T$"></TD>
+<TD ALIGN="LEFT">Hierarchy truncation level</TD>
+<TD ALIGN="CENTER">&nbsp;</TD>
+</TR>
+</TABLE>
+</DIV>
+<A NAME="tbl:parameters"></A>
+</DIV>
+<BR>
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html109"
+  HREF="node5.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.gif"></A> 
+<A NAME="tex2html105"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.gif"></A> 
+<A NAME="tex2html99"
+  HREF="node3.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.gif"></A> 
+<A NAME="tex2html107"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html110"
+  HREF="node5.html">Hierarchy equations of motion</A>
+<B> Up:</B> <A NAME="tex2html106"
+  HREF="node2.html">Introduction and theory</A>
+<B> Previous:</B> <A NAME="tex2html100"
+  HREF="node3.html">Modeling the quantum system</A>
+ &nbsp; <B>  <A NAME="tex2html108"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+http://www.ks.uiuc.edu/Research/phi
+</ADDRESS>
+</BODY>
+</HTML>

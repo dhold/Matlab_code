@@ -1,0 +1,265 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>System-environment coupling parameters</TITLE>
+<META NAME="description" CONTENT="System-environment coupling parameters">
+<META NAME="keywords" CONTENT="phi_ug">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="phi_ug.css">
+
+<LINK REL="next" HREF="node11.html">
+<LINK REL="previous" HREF="node9.html">
+<LINK REL="up" HREF="node7.html">
+<LINK REL="next" HREF="node11.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html185"
+  HREF="node11.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.gif"></A> 
+<A NAME="tex2html181"
+  HREF="node7.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.gif"></A> 
+<A NAME="tex2html175"
+  HREF="node9.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.gif"></A> 
+<A NAME="tex2html183"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html186"
+  HREF="node11.html">Environment parameters</A>
+<B> Up:</B> <A NAME="tex2html182"
+  HREF="node7.html">Input Parameters</A>
+<B> Previous:</B> <A NAME="tex2html176"
+  HREF="node9.html">System parameters</A>
+ &nbsp; <B>  <A NAME="tex2html184"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00033000000000000000">
+System-environment coupling parameters</A>
+</H2>
+
+<P>
+The system-environment coupling is based on the Drude spectral density
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+J_a(\omega)=2\lambda_a\gamma_a\omega/(\omega^2+\gamma_a^2).
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="203" HEIGHT="31" BORDER="0"
+ SRC="img98.gif"
+ ALT="\begin{displaymath}J_a(\omega)=2\lambda_a\gamma_a\omega/(\omega^2+\gamma_a^2).\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(24)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Diagonal (independent) coupling, i.e. <!-- MATH
+ $F_a = {{\left| a \right>}{\left< a \right|}}$
+ -->
+<IMG
+ WIDTH="88" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img17.gif"
+ ALT="$F_a={{\left\vert a \right&gt;}{\left&lt; a \right\vert}}$"> and <IMG
+ WIDTH="62" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img16.gif"
+ ALT="$M=N$">, is assumed unless <TT>DiagonalCouplingIndices</TT> or <TT>CorrelatedCouplingTerms</TT> are specified.
+
+<P>
+
+<UL>
+<LI><B><TT>NumCouplingTerms </TT></B> <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img91.gif"
+ ALT="$&lt;$"> <IMG
+ WIDTH="23" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img61.gif"
+ ALT="$M$"> <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img92.gif"
+ ALT="$&gt;$"> <A NAME="598"></A> 
+<BR><B>Acceptable Values: </B> positive integers 
+<BR><B>Default Value: </B> 0 
+<BR><B>Description: </B> Specifies the number of system-bath coupling terms. 
+<BR><B>Example line(s):
+<BR></B>  <TT>NumCouplingTerms=2</TT>
+<BR></LI>
+<LI><B><TT>lambda </TT></B> <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img91.gif"
+ ALT="$&lt;$"> <IMG
+ WIDTH="23" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img63.gif"
+ ALT="$\lambda_a$"> <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img92.gif"
+ ALT="$&gt;$"> <A NAME="605"></A> 
+<BR><B>Acceptable Values: </B>  <IMG
+ WIDTH="23" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img61.gif"
+ ALT="$M$"> real values 
+<BR><B>Default Value: </B>  None  
+<BR><B>Description: </B>  Specifies the reorganization energy <IMG
+ WIDTH="23" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img63.gif"
+ ALT="$\lambda_a$"> associated with each coupling term <IMG
+ WIDTH="24" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.gif"
+ ALT="$F_a$">. Units are cm<IMG
+ WIDTH="22" HEIGHT="20" ALIGN="BOTTOM" BORDER="0"
+ SRC="img65.gif"
+ ALT="$^{-1}$"> 
+<BR><B>Example line(s):
+<BR></B>  <TT>lambda:
+<BR>
+100.,50.0</TT>
+<BR></LI>
+<LI><B><TT>gamma </TT></B> <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img91.gif"
+ ALT="$&lt;$"> <IMG
+ WIDTH="21" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img64.gif"
+ ALT="$\gamma_a$"> <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img92.gif"
+ ALT="$&gt;$"> <A NAME="613"></A> 
+<BR><B>Acceptable Values: </B>  <IMG
+ WIDTH="23" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img61.gif"
+ ALT="$M$"> real values 
+<BR><B>Default Value: </B>  None  
+<BR><B>Description: </B>  Specifies the response frequency <IMG
+ WIDTH="21" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img64.gif"
+ ALT="$\gamma_a$"> associated with each coupling term <IMG
+ WIDTH="24" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.gif"
+ ALT="$F_a$">. Units are ps<IMG
+ WIDTH="22" HEIGHT="20" ALIGN="BOTTOM" BORDER="0"
+ SRC="img65.gif"
+ ALT="$^{-1}$"> 
+<BR><B>Example line(s):
+<BR></B>  <TT>gamma:
+<BR>
+10,10</TT>
+<BR></LI>
+<LI><B><TT>DiagonalCouplingIndices </TT></B> <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img91.gif"
+ ALT="$&lt;$"> <IMG
+ WIDTH="18" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img99.gif"
+ ALT="$i_a$"> <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img92.gif"
+ ALT="$&gt;$"> <A NAME="621"></A> 
+<BR><B>Acceptable Values: </B>  <IMG
+ WIDTH="23" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img61.gif"
+ ALT="$M$"> non-negative integers 
+<BR><B>Default Value: </B>  None  
+<BR><B>Description: </B>  Specifies the state <!-- MATH
+ ${\left| i_a \right>}$
+ -->
+<IMG
+ WIDTH="30" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img100.gif"
+ ALT="${\left\vert i_a \right&gt;}$"> to which the term <IMG
+ WIDTH="24" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.gif"
+ ALT="$F_a$"> couples. Note: state numbering starts from 0.  
+<BR><B>Example line(s):
+<BR></B>  <TT>#For NumStates=2 and NumCouplingTerms=4
+<BR>
+DiagonalCouplingIndices:
+<BR>
+0,0,1,1</TT>
+<BR></LI>
+<LI><B><TT>CorrelatedCouplingTerms </TT></B> <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img91.gif"
+ ALT="$&lt;$"> <IMG
+ WIDTH="25" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img62.gif"
+ ALT="$f_{ai}$"> <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img92.gif"
+ ALT="$&gt;$"> <A NAME="631"></A> 
+<BR><B>Acceptable Values: </B>  <IMG
+ WIDTH="60" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img101.gif"
+ ALT="$M\times N$"> real values 
+<BR><B>Default Value: </B>  None  
+<BR><B>Description: </B>  Specifies each system-environment coupling <!-- MATH
+ $F_a = \sum_i f_{ai}{{\left| i \right>}{\left< i \right|}}$
+ -->
+<IMG
+ WIDTH="130" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img102.gif"
+ ALT="$F_a = \sum_i f_{ai}{{\left\vert i \right&gt;}{\left&lt; i \right\vert}}$">.  
+<BR><B>Example line(s):
+<BR></B>  <TT>#For NumStates=2 and NumCouplingTerms=3
+<BR>
+CorrelatedCouplingTerms:
+<BR>
+1,0
+<BR>
+0,1
+<BR>
+0.7071,-0.7071</TT>
+<BR>
+<P>
+</LI>
+</UL>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html185"
+  HREF="node11.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.gif"></A> 
+<A NAME="tex2html181"
+  HREF="node7.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.gif"></A> 
+<A NAME="tex2html175"
+  HREF="node9.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.gif"></A> 
+<A NAME="tex2html183"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html186"
+  HREF="node11.html">Environment parameters</A>
+<B> Up:</B> <A NAME="tex2html182"
+  HREF="node7.html">Input Parameters</A>
+<B> Previous:</B> <A NAME="tex2html176"
+  HREF="node9.html">System parameters</A>
+ &nbsp; <B>  <A NAME="tex2html184"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+http://www.ks.uiuc.edu/Research/phi
+</ADDRESS>
+</BODY>
+</HTML>

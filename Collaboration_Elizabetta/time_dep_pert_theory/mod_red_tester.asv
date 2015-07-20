@@ -1,0 +1,30 @@
+   R_mod_red =  mod_redfield_calc(g_broad,g_deriv,g_sec_der,lam_tot,...
+                       M_prj(2:N+1,2:N+1),diag(H_exciton(2:N+1,2:N+1)),t_int_rng);
+                   %%
+    R_mod_red  = R_mod_red'  - diag(sum(R_mod_red',1)); %balance condition     
+
+de_ee = @(t,v) -R_mod_red*v;
+%de_ee = @(t,v) -R_reduced*v;
+%de_ee = @(t,v) -saved_val*v;
+
+init_state = zeros(N);
+init_state(6,6) = 1;
+init_state = M_prj(2:N+1,2:N+1)'*init_state*M_prj(2:N+1,2:N+1);
+init_state = diag(init_state);
+[a,b]=ode45(de_ee,[0,1*convfact],init_state); 
+
+figure
+plot(a/convfact,b)
+
+bb = zeros(8,8,length(a));
+for k = 1:8
+bb(k,k,:) = b(:,k);
+end
+bb = mtimesx(PP,'C',bb);
+bb = mtimesx(bb,PP);
+bbb = reshape(bb,64,length(a));
+
+tmp = eye(N); tmp = reshape(logical(tmp),N^2,1);
+
+figure
+plot(a/convfact,bbb(tmp,:))

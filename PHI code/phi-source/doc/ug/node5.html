@@ -1,0 +1,260 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Hierarchy equations of motion</TITLE>
+<META NAME="description" CONTENT="Hierarchy equations of motion">
+<META NAME="keywords" CONTENT="phi_ug">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="phi_ug.css">
+
+<LINK REL="next" HREF="node6.html">
+<LINK REL="previous" HREF="node4.html">
+<LINK REL="up" HREF="node2.html">
+<LINK REL="next" HREF="node6.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html121"
+  HREF="node6.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.gif"></A> 
+<A NAME="tex2html117"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.gif"></A> 
+<A NAME="tex2html111"
+  HREF="node4.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.gif"></A> 
+<A NAME="tex2html119"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html122"
+  HREF="node6.html">Integrating the HEOM</A>
+<B> Up:</B> <A NAME="tex2html118"
+  HREF="node2.html">Introduction and theory</A>
+<B> Previous:</B> <A NAME="tex2html112"
+  HREF="node4.html">Correlation functions</A>
+ &nbsp; <B>  <A NAME="tex2html120"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00023000000000000000">
+Hierarchy equations of motion</A>
+</H2>
+The exponential terms in Eq.&nbsp;<A HREF="node4.html#corrfcn2">14</A> lead to a hierarchy of matrices <IMG
+ WIDTH="23" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img67.gif"
+ ALT="$\rho_{\bf n}$">(t), called auxiliary density matrices (ADMs), to take into account the non-Markovian evolution of <IMG
+ WIDTH="33" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img24.gif"
+ ALT="$\rho(t)$">. The ADMs are indexed by a vector <!-- MATH
+ ${\bf n}=\left(n_{10},\cdots,n_{1K},\cdots,n_{M0},\cdots,n_{MK}\right)$
+ -->
+<IMG
+ WIDTH="294" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img68.gif"
+ ALT="${\bf n}=\left(n_{10},\cdots,n_{1K},\cdots,n_{M0},\cdots,n_{MK}\right)$"> and coupled through the index operators <!-- MATH
+ ${\bf n}_{ak}^{\pm} = \left(n_{10},\cdots,n_{ak}\pm 1,\cdots,n_{MK}\right)$
+ -->
+<IMG
+ WIDTH="264" HEIGHT="39" ALIGN="MIDDLE" BORDER="0"
+ SRC="img69.gif"
+ ALT="${\bf n}_{ak}^{\pm} = \left(n_{10},\cdots,n_{ak}\pm 1,\cdots,n_{MK}\right)$">. The hierarchy equations of motion are
+<BR>
+<DIV ALIGN="CENTER"><A NAME="eqn:HEOM"></A>
+<!-- MATH
+ \begin{eqnarray}
+\dot {\rho}_{\bf n} &=& -\frac i \hbar \left[ H_S, \rho_{\bf n}\right]-\sum_{a=1}^M\sum_{k=0}^K n_{ak}\nu_{ak} \rho_{\bf n}\\
+    &&-\sum_{a=1}^M\left(\frac{2\lambda_a}{\beta\hbar^2\gamma_a}-\sum_{k=0}^K \frac{c_{ak}}{\hbar\nu_{ak}}\right)\left[ F_a,\left[  F_a, \rho_{\bf n}\right]\right]\\
+    &&-i\sum_{a=1}^M\left[ F_a,\sum_{k=0}^K \rho_{{\bf n}_{ak}^+}\right]  -\frac{i}{\hbar}\sum_{a=1}^M\sum_{k=0}^K n_{ak} \left(c_{ak}  F_a  \rho_{{\bf n}_{ak}^-} -  \rho_{{\bf n}_{ak}^-}  F_a c_{ak}^*\right).
+\end{eqnarray}
+ -->
+<TABLE ALIGN="CENTER" CELLPADDING="0" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ WIDTH="23" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img70.gif"
+ ALT="$\displaystyle \dot {\rho}_{\bf n}$"></TD>
+<TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img49.gif"
+ ALT="$\textstyle =$"></TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="240" HEIGHT="73" ALIGN="MIDDLE" BORDER="0"
+ SRC="img71.gif"
+ ALT="$\displaystyle -\frac i \hbar \left[ H_S, \rho_{\bf n}\right]-\sum_{a=1}^M\sum_{k=0}^K n_{ak}\nu_{ak} \rho_{\bf n}$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(18)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="306" HEIGHT="73" ALIGN="MIDDLE" BORDER="0"
+ SRC="img72.gif"
+ ALT="$\displaystyle -\sum_{a=1}^M\left(\frac{2\lambda_a}{\beta\hbar^2\gamma_a}-\sum_{...
+...{c_{ak}}{\hbar\nu_{ak}}\right)\left[ F_a,\left[ F_a, \rho_{\bf n}\right]\right]$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(19)</TD></TR>
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT">&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD ALIGN="LEFT" NOWRAP><IMG
+ WIDTH="483" HEIGHT="73" ALIGN="MIDDLE" BORDER="0"
+ SRC="img73.gif"
+ ALT="$\displaystyle -i\sum_{a=1}^M\left[ F_a,\sum_{k=0}^K \rho_{{\bf n}_{ak}^+}\right...
+...t(c_{ak} F_a \rho_{{\bf n}_{ak}^-} - \rho_{{\bf n}_{ak}^-} F_a c_{ak}^*\right).$"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(20)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+More simply written as 
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\dot {\rho}_{\bf n} = \mathcal{L}_{eff}\;{\rho}_{\bf n} + \sum_{a}\sum_{k}\mathcal{P}_{ak}\;{\rho}_{{\bf n}_{ak}^+} + \sum_{a}\sum_{k}\mathcal{N}_{ak}\;{\rho}_{{\bf n}_{ak}^-},
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="390" HEIGHT="50" BORDER="0"
+ SRC="img74.gif"
+ ALT="\begin{displaymath}
+\dot {\rho}_{\bf n} = \mathcal{L}_{eff}\;{\rho}_{\bf n} + \s...
+...} + \sum_{a}\sum_{k}\mathcal{N}_{ak}\;{\rho}_{{\bf n}_{ak}^-},
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(21)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where <!-- MATH
+ $\mathcal{L}_{eff},\mathcal{P}_{ak}$
+ -->
+<IMG
+ WIDTH="74" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img75.gif"
+ ALT="$\mathcal{L}_{eff},\mathcal{P}_{ak}$"> and <!-- MATH
+ $\mathcal{N}_{ak}$
+ -->
+<IMG
+ WIDTH="34" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img76.gif"
+ ALT="$\mathcal{N}_{ak}$"> are Liouville space operators <IMG
+ WIDTH="19" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img77.gif"
+ ALT="$\mathcal{X}$">, such that <!-- MATH
+ $\mathcal{X} \bullet = X\bullet - \bullet X^\dag$
+ -->
+<IMG
+ WIDTH="136" HEIGHT="39" ALIGN="MIDDLE" BORDER="0"
+ SRC="img78.gif"
+ ALT="$\mathcal{X} \bullet = X\bullet - \bullet X^\dag $"> for the corresponding Hilbert space operator <IMG
+ WIDTH="20" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img79.gif"
+ ALT="$X$">. Any ADM with a negative in the index vector <IMG
+ WIDTH="15" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img80.gif"
+ ALT="${\bf n}$"> is set to 0.  
+
+<P>
+The ADMs need to be truncated to a finite number. Each ADM can be assign to a level <!-- MATH
+ $L = \sum_{a=1}^M\sum_{k=0}^K n_{ak}$
+ -->
+<IMG
+ WIDTH="159" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img81.gif"
+ ALT="$L = \sum_{a=1}^M\sum_{k=0}^K n_{ak}$">. There are two ways to truncate the hierarchy of ADMs to some level <IMG
+ WIDTH="27" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img66.gif"
+ ALT="$L_T$">: time non-local (TNL) truncation and time local (TL) truncation. In case of TNL truncation, all ADMs with <IMG
+ WIDTH="62" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img82.gif"
+ ALT="$L \ge L_T$"> is set to zero. In case of TL truncation, all ADMs with <IMG
+ WIDTH="92" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img83.gif"
+ ALT="$L=L_T-1$"> the Markovian approximation is assumed, such that
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\sum_{k=0}^K\hat \rho_{{\bf n}_{ak}^+} \approx -i \left( \hat Q_a^K(t) \rho_{\bf n} - \rho_{\bf n} {\hat Q_a^K(t)}^\dag\right),
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="292" HEIGHT="62" BORDER="0"
+ SRC="img84.gif"
+ ALT="\begin{displaymath}
+\sum_{k=0}^K\hat \rho_{{\bf n}_{ak}^+} \approx -i \left( \ha...
+...^K(t) \rho_{\bf n} - \rho_{\bf n} {\hat Q_a^K(t)}^\dag\right),
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(22)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\hat Q_a^K(t) = \int_0^t \left(\sum_{k=0}^K c_{ak} \exp\left(-\nu_{ak} \tau\right)\right)\exp\left(-\frac{i}{\hbar}H_S\,\tau\right)\hat F_a \exp\left(\frac{i}
+{\hbar}H_S\,\tau\right)d\tau.
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="542" HEIGHT="62" BORDER="0"
+ SRC="img85.gif"
+ ALT="\begin{displaymath}
+\hat Q_a^K(t) = \int_0^t \left(\sum_{k=0}^K c_{ak} \exp\left...
+...ight)\hat F_a \exp\left(\frac{i}
+{\hbar}H_S\,\tau\right)d\tau.
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(23)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html121"
+  HREF="node6.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.gif"></A> 
+<A NAME="tex2html117"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.gif"></A> 
+<A NAME="tex2html111"
+  HREF="node4.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.gif"></A> 
+<A NAME="tex2html119"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html122"
+  HREF="node6.html">Integrating the HEOM</A>
+<B> Up:</B> <A NAME="tex2html118"
+  HREF="node2.html">Introduction and theory</A>
+<B> Previous:</B> <A NAME="tex2html112"
+  HREF="node4.html">Correlation functions</A>
+ &nbsp; <B>  <A NAME="tex2html120"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+http://www.ks.uiuc.edu/Research/phi
+</ADDRESS>
+</BODY>
+</HTML>

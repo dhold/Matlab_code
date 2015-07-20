@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Integration parameters</TITLE>
+<META NAME="description" CONTENT="Integration parameters">
+<META NAME="keywords" CONTENT="phi_ug">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="phi_ug.css">
+
+<LINK REL="previous" HREF="node12.html">
+<LINK REL="up" HREF="node7.html">
+<LINK REL="next" HREF="node14.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html219"
+  HREF="node14.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.gif"></A> 
+<A NAME="tex2html215"
+  HREF="node7.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.gif"></A> 
+<A NAME="tex2html211"
+  HREF="node12.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.gif"></A> 
+<A NAME="tex2html217"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html220"
+  HREF="node14.html">Running Phi</A>
+<B> Up:</B> <A NAME="tex2html216"
+  HREF="node7.html">Input Parameters</A>
+<B> Previous:</B> <A NAME="tex2html212"
+  HREF="node12.html">Hierarchy parameters</A>
+ &nbsp; <B>  <A NAME="tex2html218"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00036000000000000000">
+Integration parameters</A>
+</H2>
+
+<UL>
+<LI><B><TT>Timestep </TT></B> <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img91.gif"
+ ALT="$&lt;$"> <IMG
+ WIDTH="20" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img86.gif"
+ ALT="$dt$"> <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img92.gif"
+ ALT="$&gt;$"> <A NAME="672"></A> 
+<BR><B>Acceptable Values: </B>  positive real values  
+<BR><B>Default Value: </B>  0.001  
+<BR><B>Description: </B>  Specifies the RK4 integration timestep in ps (also used as initial RKF45 timestep. 
+<BR><B>Example line(s):
+<BR></B>  <TT>Timestep=0.001</TT>
+<BR></LI>
+<LI><B><TT>Time </TT></B> <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img91.gif"
+ ALT="$&lt;$"> <IMG
+ WIDTH="11" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img106.gif"
+ ALT="$t$"> <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img92.gif"
+ ALT="$&gt;$"> <A NAME="679"></A> 
+<BR><B>Acceptable Values: </B>  positive real values  
+<BR><B>Default Value: </B>  0  
+<BR><B>Description: </B>  Specifies time in ps to integrate HEOM to. 
+<BR><B>Example line(s):
+<BR></B>  <TT>Time=1.0</TT>
+<BR></LI>
+<LI><B><TT>RKF45mindt </TT></B> <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img91.gif"
+ ALT="$&lt;$"> <IMG
+ WIDTH="45" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img87.gif"
+ ALT="$dt_{min}$"> <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img92.gif"
+ ALT="$&gt;$"> <A NAME="687"></A> 
+<BR><B>Acceptable Values: </B>  positive real values  
+<BR><B>Default Value: </B>  1e-6  
+<BR><B>Description: </B>  Specifies minimum timestep in ps to use in adaptive RKF45 integration. 
+<BR><B>Example line(s):
+<BR></B>  <TT>RKF45mindt=1e-5</TT>
+<BR></LI>
+<LI><B><TT>RKF45tolerance </TT></B> <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img91.gif"
+ ALT="$&lt;$"> <IMG
+ WIDTH="20" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img88.gif"
+ ALT="$\delta_I$"> <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img92.gif"
+ ALT="$&gt;$"> <A NAME="694"></A> 
+<BR><B>Acceptable Values: </B>  positive real values  
+<BR><B>Default Value: </B>  1e-6  
+<BR><B>Description: </B>  Specifies integration tolerance for adaptive RKF45 integration. 
+<BR><B>Example line(s):
+<BR></B>  <TT>RKF45tolerance=1e-4</TT>
+<BR></LI>
+<LI><B><TT>FilterTolerance </TT></B> <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img91.gif"
+ ALT="$&lt;$"> <IMG
+ WIDTH="23" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img107.gif"
+ ALT="$\delta_F$"> <IMG
+ WIDTH="18" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img92.gif"
+ ALT="$&gt;$"> <A NAME="701"></A> 
+<BR><B>Acceptable Values: </B>  positive real values  
+<BR><B>Default Value: </B>  1e-6  
+<BR><B>Description: </B>  Specifies filter tolerance for adaptive hierarchy truncation. 
+<BR><B>Example line(s):
+<BR></B>  <TT>FilterTolerance=1e-3</TT>
+<BR>
+<P>
+</LI>
+</UL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+http://www.ks.uiuc.edu/Research/phi
+</ADDRESS>
+</BODY>
+</HTML>

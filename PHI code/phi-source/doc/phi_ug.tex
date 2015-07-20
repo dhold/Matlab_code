@@ -1,0 +1,328 @@
+\documentclass[11pt]{article}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+%\usepackage{graphicx}
+\usepackage{amssymb}
+%\usepackage{epstopdf}
+%\usepackage{braket}
+
+\newcommand{\PHI}{\texttt{PHI}} 
+\newcommand{\tr}{{\rm tr} } 
+\newcommand{\ket}[1]{{\left| #1 \right>}}
+\newcommand{\bra}[1]{{\left< #1 \right|}}
+\newcommand{\ketbra}[2]{{\ket{#1}\bra{#2}}}
+
+\newcommand{\PARAMDESC}[6]{%
+  {\bf \tt #1 } $<$ #2 $>$ \index{#1 parameter} \\%
+  {\bf Acceptable Values: } #3 \\%
+  {\bf Default Value: } #4 \\%
+  {\bf Description: } #5 \\%
+  {\bf Example line(s):\\ } { \tt #6}\\%
+}
+
+
+%\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{PHI User's Guide}
+\author{Johan Str\"umpfer\vspace{2cm}}
+\date{\today}                                           % Activate to display a given date or no date
+
+\sloppy
+
+\begin{document}
+
+
+\maketitle
+\begin{center}
+Version 1.0\\
+\vspace{1.0cm}
+Theoretical and Computational Biophysics Group, Beckman Institute, University of Illinois. 
+\end{center}
+
+\clearpage
+\tableofcontents
+\clearpage
+\section{Introduction and theory}
+\PHI\ is a multi-threaded software implementation of a hierarchy equation of motion (HEOM) integrator to run on shared memory parallel computers. The HEOM is a method to calculate the noise-averaged time evolution of density matrix that describes a quantum system in contact with a thermal environment. The dynamics of quantum systems in a thermal environment, sometimes called dissipative quantum dynamics or open quantum dynamics, is of interest in many areas of research and has been studied for many decades with various methods. This User's Guide gives a brief introduction of the specify a quantum system in the input parameter file, and then run \PHI to calculate the density matrix evolution. For a thorough treatment of open quantum systems please read:
+\begin{itemize}
+\item H.P Breuer and F. Petruccione. ``The theory of open quantum systems.''\\ Oxford University Press. 2002
+\item U. Weiss. ``Dissipative quantum systems.''\\ World Scientific. 2008
+\end{itemize}
+
+
+\subsection{Modeling the quantum system}
+To describe the input parameters for \PHI, first the model of the quantum system has to be specified.
+The quantum system is described by a total Hamiltonian 
+\begin{equation}
+H_T = H_S + H_B + H_{SB}  + H_{ren},
+\end{equation}
+where $H_S$ describes the system of interest, $H_B$ the thermal environment, $H_{SB}$ the system-environment coupling, and $H_{ren}$ is a renormalization term (specified below) dependent on the system-environment coupling. 
+The system Hamiltonian describes states $\ket{i}$, $i=1,\cdots,N$ with energies $E_i$ and interaction $V_{ij}$ as
+\begin{equation}
+H_S  = \sum_{i=1}^N \ket{i}\bra{i} E_i + \sum_{i\ne j=1}^{N} V_{ij}\ket{i}\bra{j},
+\end{equation}
+The environment is modeled as an infinite set of harmonic oscillators with
+\begin{equation}
+H_B = \sum_\xi \frac{p_\xi^2}{2m_\xi} + \frac{m_\xi\omega_\xi^2q_\xi^2}{2}
+\end{equation}
+The system-environment coupling is assumed to be linear given by
+\begin{equation}
+H_{SB} = \sum_{a=1}^M F_a \sum_\xi c_{a\xi}q_\xi = \sum_{a=1}^M F_a u_a,
+\end{equation}
+where $F_a = \sum_{i,j=}^N f_{aij} \ketbra{i}{j} $ specifies the exact form of the coupling. At present only diagonal forms of $F_a$ are implemented in \PHI, such that $ {f_{aij} = \delta_{ij}\;f_{ai}} $. In the present implementation only three types of $F_a$ are allowed:
+\begin{enumerate}
+\item diagonal, independent coupling: $M=N$, $F_a=\ketbra{a}{a}$
+\item diagonal, independent coupling: $M\ne N$, $F_a =  \ketbra{i_a}{i_a}$ for $i_a \in \left\{1,\cdots,N\right\}$.
+\item diagonal, correlated coupling:    $M=N$, $F_a = \sum_{i=1}^N f_{ai}\ketbra{i}{i}$
+\end{enumerate}
+%\begin{equation}
+%F_a = \sum_{i=1}^N f_{ia} \ket{i}\bra{i}
+%\end{equation}
+The coupling introduces a shift in the bath coordinates $q_\xi$ that needs to be countered with the renormalization term 
+\begin{equation}
+H_{ren} = \sum_{a,b=1}^M F_{a} F_{b} \sum_\xi \frac{c_{a\xi} c_{b\xi}}{2 m_\xi \omega_\xi^2}.
+\end{equation}
+Note that the renormalization term is NOT added to the system Hamiltonian in \PHI\ -- this is left up to the user to include in the Hamiltonian section of the input parameters.
+\PHI\ implements the HEOM to calculate the system density matrix $\rho(t)$ averaged over environmental fluctuations
+\begin{equation}
+\rho(t) = \left< W(t) \right>_B,
+\end{equation}
+where $W(t)$ is the density matrix of the complete system + environment. The time evolution of $W(t)$ is formally calculated as
+\begin{equation}
+W(t) = e^{- i H_T / \hbar } W(0) e^{i H_T / \hbar },
+\end{equation}
+Where $W(0)$ specifies the density matrix of the complete system at $t=0$. Assuming that the environment is in thermal equilibrium and that initially the  system and environment are uncorrelated, the initial density matrix is given by
+\begin{equation} 
+W(0) = \rho(0)\otimes R,
+\end{equation}
+where $R = \exp(-\beta H_B)/\tr_B\left\{{\exp(-\beta H_B)}\right\}$, $\tr_B$ is the partial trace over bath coordinates and $\beta=1/T$ is the inverse temperature. The system density matrix evolution can be written as
+\begin{equation}
+\rho(t) = \left< e^{- i H_T / \hbar }  \rho(0) e^{i H_T / \hbar } \right>_B = \tr_B \left\{ e^{- i H_T / \hbar }\ \rho(0)\otimes R\ e^{i H_T / \hbar } \right\}
+\end{equation}
+
+\subsection{Correlation functions}
+The bath correlation functions $C_{ab}(t)$ determines how the environment fluctuations affect the system through the couplings $F_a$. The bath correlation functions are given as
+\begin{equation}
+C_{ab}(t) = \left< u_a(t)u_b(0)\right>_B = \tr_B\left\{u_a(t)u_b(0)\frac{ \exp \left(-\beta H_B\right)}{\tr_B\left\{\exp\left(-\beta H_B\right)\right\}}  \right\}.
+\end{equation}
+Here $u_a(t)$ evolve according to the interaction representation with respect to $H_{SB}$ and $\beta = 1/T$ is the inverse temperature. The correlation function tells us how a perturbation of the environment caused by the coupling $F_a$ affects the system at a later time through the coupling $F_b$. The correlation functions are usually specified through the Fourier-Laplace transform of the spectral density $J_a(\omega)$ as
+\begin{equation}
+C_{ab}(t) =  \frac{1}{\pi} \int_0^{\infty} d\omega J_{ab}\left(\omega\right) \frac{e^{-i \omega t}}{1-e^{-\beta\hbar\omega}},
+\label{corrfcn1}
+\end{equation}
+where, 
+\begin{equation}
+J_{ab}(\omega) = \sum_\xi \frac{\pi}{2} \sum_{\xi} \frac{c_{a\xi} c_{b\xi}}{m_\xi \omega_\xi} \delta(\omega-\omega_\xi).
+\end{equation}
+
+The HEOM arise by assuming a form of bath correlation functions given by
+\begin{equation}
+C_{ab}(t) = \sum_{k=0}^K c_{abk} e^{- \left(\nu_{abk}+i\Omega_{abk}\right) t}.
+\end{equation}
+The huge computational expense of such arbitrary correlation functions (especially with large M and K) restricts us to forms with $C_{ab}(t) = \delta_{ab} C_a(t)$ and $\Omega_{abk}=0$. This gives the bath correlation functions as
+\begin{equation}
+C_a(t) = \sum_{k=0}^\infty c_{ak} e^{- \nu_{ak}t },
+\label{corrfcn2}
+\end{equation}
+which corresponds to spectral densities of the Drude form given by
+\begin{equation}
+J_a(\omega) = 2 \lambda_a\frac{ \omega\gamma_a } {\omega^2 + \gamma_a^2}.
+\end{equation}
+The Drude spectral density, and employing a Matsubara expansion of $1/({1-\exp({-\beta\hbar\omega}}))$ is Eq.~\ref{corrfcn1}, results in correlation function coefficients
+\begin{eqnarray}
+c_{a0} &=& {\gamma_a \lambda_a}\left[ \cot (\beta \hbar \gamma_a/2) - i\right] \\
+c_{ak\ge1} &=& \frac{4 \lambda_a \gamma_a}{\beta \hbar} \frac{\nu_{ak}}{\nu_{ak}^2-\gamma_a^2}.
+\label{coefficients}
+\end{eqnarray}
+and damping constants $\nu_{a0} = \gamma_a$, $\nu_{ak\ge1} = 2\pi k/\beta\hbar$. The infinite number of Matsubara terms $\nu_{ak}$ in Eq.~\ref{corrfcn2} is truncated to a finite $K$ where for all $k>K$, $\nu_{ak}\exp(-\nu_{ak}t)\approx \delta(t)$.
+
+The parameters needed to model the system are summarized in Table~\ref{tbl:parameters}.
+\begin{table}[h!!tdp]
+\caption{Parameters defining model of quantum system}
+\begin{center}
+\begin{tabular}{llc}
+Parameter & Meaning & Units \\ 
+\hline
+$N$               & Number of states $\ket{i}$ & \\
+$E_i$            & Energy level of state $\ket{i}$ & [Energy] \\
+$V_{ij}$         & Interaction between states $\ket{i}$ and $\ket{j}$ & [Energy] \\
+$M$              & Number of system-environment coupling terms & \\ 
+$f_{ai}$         & Elements of $F_a$ specifying system-environment coupling & \\
+$\lambda_a$ & Strength of coupling $F_a$ & [Energy]\\
+$\gamma_a$ & Response frequency of environment from $F_a$ coupling & [time]$^{-1}$ \\
+$K$                & Number of Matsubara terms to include\\
+$L_T$            & Hierarchy truncation level\\
+\hline
+\end{tabular}
+\end{center}
+\label{tbl:parameters}
+\end{table}%
+
+
+\subsection{Hierarchy equations of motion}
+The exponential terms in Eq.~\ref{corrfcn2} lead to a hierarchy of matrices $\rho_{\bf n}$(t), called auxiliary density matrices (ADMs), to take into account the non-Markovian evolution of $\rho(t)$. The ADMs are indexed by a vector ${\bf n}=\left(n_{10},\cdots,n_{1K},\cdots,n_{M0},\cdots,n_{MK}\right)$ and coupled through the index operators ${\bf n}_{ak}^{\pm} = \left(n_{10},\cdots,n_{ak}\pm 1,\cdots,n_{MK}\right)$. The hierarchy equations of motion are
+\begin{eqnarray}
+\dot {\rho}_{\bf n} &=& -\frac i \hbar \left[ H_S, \rho_{\bf n}\right]-\sum_{a=1}^M\sum_{k=0}^K n_{ak}\nu_{ak} \rho_{\bf n}\\
+    &&-\sum_{a=1}^M\left(\frac{2\lambda_a}{\beta\hbar^2\gamma_a}-\sum_{k=0}^K \frac{c_{ak}}{\hbar\nu_{ak}}\right)\left[ F_a,\left[  F_a, \rho_{\bf n}\right]\right]\\
+    &&-i\sum_{a=1}^M\left[ F_a,\sum_{k=0}^K \rho_{{\bf n}_{ak}^+}\right]  -\frac{i}{\hbar}\sum_{a=1}^M\sum_{k=0}^K n_{ak} \left(c_{ak}  F_a  \rho_{{\bf n}_{ak}^-} -  \rho_{{\bf n}_{ak}^-}  F_a c_{ak}^*\right).
+\label{eqn:HEOM}
+\end{eqnarray}
+More simply written as 
+\begin{equation}
+\dot {\rho}_{\bf n} = \mathcal{L}_{eff}\;{\rho}_{\bf n} + \sum_{a}\sum_{k}\mathcal{P}_{ak}\;{\rho}_{{\bf n}_{ak}^+} + \sum_{a}\sum_{k}\mathcal{N}_{ak}\;{\rho}_{{\bf n}_{ak}^-},
+\end{equation}
+where $\mathcal{L}_{eff},\mathcal{P}_{ak}$ and $\mathcal{N}_{ak}$ are Liouville space operators $\mathcal{X}$, such that $\mathcal{X} \bullet = X\bullet - \bullet X^\dag$ for the corresponding Hilbert space operator $X$. Any ADM with a negative in the index vector ${\bf n}$ is set to 0.  
+
+The ADMs need to be truncated to a finite number. Each ADM can be assign to a level $L = \sum_{a=1}^M\sum_{k=0}^K n_{ak}$. There are two ways to truncate the hierarchy of ADMs to some level $L_T$: time non-local (TNL) truncation and time local (TL) truncation. In case of TNL truncation, all ADMs with $L \ge L_T$ is set to zero. In case of TL truncation, all ADMs with $L=L_T-1$ the Markovian approximation is assumed, such that
+\begin{equation}
+\sum_{k=0}^K\hat \rho_{{\bf n}_{ak}^+} \approx -i \left( \hat Q_a^K(t) \rho_{\bf n} - \rho_{\bf n} {\hat Q_a^K(t)}^\dag\right),
+\end{equation}
+where
+\begin{equation}
+\hat Q_a^K(t) = \int_0^t \left(\sum_{k=0}^K c_{ak} \exp\left(-\nu_{ak} \tau\right)\right)\exp\left(-\frac{i}{\hbar}H_S\,\tau\right)\hat F_a \exp\left(\frac{i}
+{\hbar}H_S\,\tau\right)d\tau.
+\end{equation}
+
+\subsection{Integrating the HEOM}
+\PHI\ implements two method to integrate the HEOM: Runga-Kutta 4'th (RK4) order integration and Runga-Kutta-Fehlberg 4/5 (RKF45) adaptive integration. In case of RK4 integration, only a fixed timestep $dt$ needs to be chosen. In case of RKF45 integration, a minimum timestep $dt_{min}$ and integration tolerance $\delta_I$ needs to be chosen.
+
+
+\section{Input Parameters}
+\PHI\ parses an input file specified at the command line to specify the quantum system, construct the hierarchy and choose integration parameters. 
+\subsection{Parameter file format}
+The input file has a few general formatting rules:
+\begin{enumerate}
+\item \texttt{\#} at the start of a line specifies a comment.\\All comments have to be on separate lines.\\
+\item Empty lines are ignored.\\
+\item Scalar parameters are specified using\\
+\texttt{Parameter=value}\\on one line.\\
+\item Vector and matrix parameters are specified using\\
+\texttt{VectorParameter:}\\
+\texttt{value1,value2,value3}\\
+and\\
+\texttt{MatrixParameter:}\\
+\texttt{value11,value12,value13}\\
+\texttt{value21,value22,value23}\\
+\texttt{value31,value32,value33}\\
+\item Complex numbers $a+ib$ are input using \texttt{(a,b)}. E.g.\\\texttt{Parameter=(a,b)}\\
+\item \texttt{NumStates} and \texttt{NumCouplingTerms} must be specified before any vector or matrix parameters can be input.\\
+\end{enumerate}
+The following parameters MUST be specified in the input file to run \PHI:
+\begin{itemize}
+\item \texttt{NumStates}
+\item \texttt{HierarchyTruncation}
+\end{itemize}
+Although, specifying only those parameters will allow you to only check memory requirements or print a hierarchy. The minimum parameters for an integration calculation are
+\begin{itemize}
+\item \texttt{OutputFile}
+\item \texttt{NumStates}
+\item \texttt{HierarchyTruncation}
+\item \texttt{Hamiltonian}
+\item \texttt{InitialDensityMatrix}
+\item \texttt{Lambda}
+\item \texttt{Gamma}
+\item \texttt{Timestep}
+\item \texttt{Runlength}
+\end{itemize}
+
+
+\subsection{System parameters}
+The system parameters specify the $N$ quantum states $\ket{i}$ and matrix elements of the Hamiltonian $H_{i,j}$. 
+%The eigenvalues and eigenvectors of $H_S+H_{ren}$ ar
+
+\begin{itemize}
+\item \PARAMDESC{NumStates}{ $N$ }{positive integers}{0}{Specifies the number of quantum states [required]}{NumStates=2}
+\item \PARAMDESC{Hamiltonian}{ $H_S+H_{ren}$ }{ $N\times N$ real values}{ None }{ Specifies the system Hamiltonian. Note that the renormalization term must be included here}{Hamiltonian:\\0\ \ \ \ ,100.0\\100.0,20.00}
+\item \PARAMDESC{InitialDensityMatrix}{ $\rho(0)$ }{ $N\times N$ real or complex values}{ None }{ Specifies the initial values of the density matrix. The initial density matrix must be positive definite.}{InitialDensityMatrix:\\(0.5,0.0),(0.2,0.1)\\(0.2,-0.1),(0.5,0.0)}
+\item \PARAMDESC{HamiltonianEigenvalues}{ $\epsilon_i$ }{ $N$ real values}{ None }{Eigenvalues of system Hamiltonian $H_S$ [required for {\tt TimeLocal=1}].}{HamiltonianEigenvalues:\\-90.49875621,110.49875621}
+\item \PARAMDESC{HamiltonianEigenvectors}{ $\widetilde{\ket{\epsilon_i}}$ }{ $N\times N$ real values}{ None }{Orthonormal eigenvectors of system Hamiltonian $H_S$ [required for {\tt TimeLocal=1}].}{HamiltonianEigenvectors:\\-0.74145253,0.67100532\\0.67100532,0.74145253}
+
+\end{itemize}
+
+\subsection{System-environment coupling parameters}
+
+The system-environment coupling is based on the Drude spectral density
+\begin{equation}J_a(\omega)=2\lambda_a\gamma_a\omega/(\omega^2+\gamma_a^2).\end{equation}
+Diagonal (independent) coupling, i.e. $F_a = \ketbra{a}{a}$ and $M=N$, is assumed unless \texttt{DiagonalCouplingIndices} or \texttt{CorrelatedCouplingTerms} are specified.
+
+\begin{itemize}
+\item \PARAMDESC{NumCouplingTerms}{ $M$ }{positive integers}{0}{Specifies the number of system-bath coupling terms.}{NumCouplingTerms=2}
+\item \PARAMDESC{lambda}{ $\lambda_a$ }{ $M$ real values}{ None }{ Specifies the reorganization energy $\lambda_a$ associated with each coupling term $F_a$. Units are cm$^{-1}$}{lambda:\\100.,50.0}
+\item \PARAMDESC{gamma}{ $\gamma_a$ }{ $M$ real values}{ None }{ Specifies the response frequency $\gamma_a$ associated with each coupling term $F_a$. Units are ps$^{-1}$}{gamma:\\10,10}
+\item \PARAMDESC{DiagonalCouplingIndices}{ $i_a$ }{ $M$ non-negative integers}{ None }{ Specifies the state $\ket{i_a}$ to which the term $F_a$  couples. Note: state numbering starts from 0. }{\#For NumStates=2 and NumCouplingTerms=4\\DiagonalCouplingIndices:\\0,0,1,1}
+\item \PARAMDESC{CorrelatedCouplingTerms}{ $f_{ai}$ }{ $M\times N$ real values}{ None }{ Specifies each system-environment coupling $F_a = \sum_i f_{ai}\ketbra{i}{i}$. }{\#For NumStates=2 and NumCouplingTerms=3\\CorrelatedCouplingTerms:\\1,0\\0,1\\0.7071,-0.7071}
+
+\end{itemize}
+
+\subsection{Environment parameters}
+
+\begin{itemize}
+\item \PARAMDESC{Temperature}{ $T$ }{ positive real value}{ 300 Kelvin }{ Specifies the temperature of the environment. Units are in Kelvin.}{Temperature=300}
+\item \PARAMDESC{MatsubaraTerms}{ $K$ }{ non-negative integers}{0}{ Specifies the number of terms to include for the Matsubara expansion.}{MatsubaraTerms=4}
+\end{itemize}
+
+\subsection{Hierarchy parameters}
+\begin{itemize}
+\item \PARAMDESC{HierarchyTruncation}{ $L_T$ }{ integer $>$ 1}{ 0 }{ Specifies the level $L_T$ to truncate the hierarchy.}{HierarchyTruncation=5}
+\item \PARAMDESC{TimeLocal}{ use time local truncation? }{ 0 or 1 }{1}{ Specifies whether to use time local $1$ or time non-local $0$ truncation.}{TimeLocal=1}
+\end{itemize}
+
+\subsection{Integration parameters}
+\begin{itemize}
+\item \PARAMDESC{Timestep}{ $dt$ }{ positive real values }{ 0.001 }{ Specifies the RK4 integration timestep in ps (also used as initial RKF45 timestep.}{Timestep=0.001}
+\item \PARAMDESC{Time}{ $t$ }{ positive real values }{ 0 }{ Specifies time in ps to integrate HEOM to.}{Time=1.0}
+\item \PARAMDESC{RKF45mindt}{ $dt_{min}$ }{ positive real values }{ 1e-6 }{ Specifies minimum timestep in ps to use in adaptive RKF45 integration.}{RKF45mindt=1e-5}
+\item \PARAMDESC{RKF45tolerance}{ $\delta_I$ }{ positive real values }{ 1e-6 }{ Specifies integration tolerance for adaptive RKF45 integration.}{RKF45tolerance=1e-4}
+\item \PARAMDESC{FilterTolerance}{ $\delta_F$ }{ positive real values }{ 1e-6 }{ Specifies filter tolerance for adaptive hierarchy truncation.}{FilterTolerance=1e-3}
+
+
+\end{itemize}
+
+\section{Running Phi}
+
+PHI usage is printed when running\\
+{\tt \$ ./phi}\\
+
+\subsection{Usage}
+
+\begin{verbatim}
+  phi paramfile {integrator [threads],print}
+    integrator  - One of rk4, rkf45, rk4spectrum, rkf45spectrum, steadystate.
+    threads     - Number of threads
+    memory      - Prints memory requirements
+    print       - Prints hierarchy connections
+\end{verbatim} 
+
+The parameter file "paramfile" specifies all system and integration
+parameters: Hamiltonian, hierarchy truncations, adaptive
+            integration tolerances, integration length, integration step
+            size
+
+\subsection{Examples}
+To print the memory requirements associated with input system.prm\\
+{\tt \$ phi system.prm memory}\\\\
+To integrate input system.prm using 4 threads with Runga-Kutta 4:\\
+{\tt \$ phi system.prm rk4 4}\\\\
+To calculate the steady state of system.prm using 4 threads:\\
+{\tt \$ phi system.prm steadystate 4}\\\\
+An example input for a two-level system can be found in\\
+{\tt phi-source/examples/TwoLevelSystem}
+
+
+\section{Compiling Phi}
+Download the \PHI\ source code from {\tt www.ks.uiuc.edu/Research/phi}. Then:
+
+\begin{enumerate}
+\item Unzip and untar.
+
+\item Edit {\tt make.config} in the source root directory to \\
+    - provide paths to CBLAS libraries and headers\\
+    - specify computer architecture (linux, mac, solaris)\\
+    - choose compiler (gcc, icc, sun CC)
+
+\item {\tt ./make install} to install the phi binary to {\tt ./bin/}
+\end{enumerate}
+
+\end{document}  

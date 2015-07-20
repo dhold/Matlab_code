@@ -1,0 +1,96 @@
++----------------------------------------------------------+
+|                                                          |
+|                  PHI 1.0 Release Notes                   |
+|                                                          |
++----------------------------------------------------------+
+
+This file contains the following sections:
+  - What is PHI?
+  - Capabilites
+  - Compiling PHI
+  - Running PHI
+  - Memory Usage
+  
+-----------------------------------------------------------
+
+What is PHI?
+
+PHI = Parallel Hierarchy Integrator
+
+PHI is an integration software package for the hierarchy
+equation of motion (HEOM) that computes the noise- 
+averaged density matrix evolution for a system in contact 
+with a thermal environment. PHI will run on a Unix platforms,
+provided a cblas library is available.
+
+More documentation will be available at
+http://www.ks.uiuc.edu/Research/phi
+
+-----------------------------------------------------------
+
+Capabilities
+
+The following options are available (not all documented in 
+  User's Guide):
+  - Runga-Kutta 4
+  - Runge-Kutta-Fehlberg 4/5 adaptive timestep  
+  - Adaptive hierarchy truncation
+  - Time non-local truncation
+  - Time local truncation
+  - Matsubara expansion for finite temperatures
+  - Steady-state calculation via the BiCGSTAB method
+  - Correlated environmental influence between states
+
+-----------------------------------------------------------
+
+Compiling PHI
+
+1. Edit make.config in the source root directory to 
+    - provide paths to CBLAS libraries and headers
+    - specify computer architecture (linux, mac, solaris)
+    - choose compiler (gcc, icc, sun CC)
+
+2. Run ./make install to install the phi binary to ./bin/
+
+-----------------------------------------------------------
+
+Running PHI
+
+PHI usage is printed when running 
+$ ./phi
+
+Usage: 
+
+  phi paramfile {integrator [threads],print}
+    integrator  - One of rk4, rkf45, rk4spectrum, rkf45spectrum, steadystate.
+    threads     - Number of threads
+    memory      - Prints memory requirements
+    print       - Prints hierarchy connections 
+
+The parameter file "paramfile" specifies all system and integration
+parameters: Hamiltonian, hierarchy truncations, adaptive
+            integration tolerances, integration length, integration step
+            size
+
+Examples:
+To print the memory requirements associated with input system.prm
+$ phi system.prm memory
+
+To integrate input system.prm using 4 threads with Runga-Kutta 4:
+$ phi system.prm rk4 4
+
+To calculate the steady state of system.prm using 4 threads:
+$ phi system.prm steadystate 4
+
+An example input for a two-level system can be found in
+./examples/TwoLevelSystem
+
+-----------------------------------------------------------
+
+Memory Usage
+
+Due to the extreme scaling of hierarchy size with system 
+size and truncation, it is HIGHLY recommended to check memory
+requirements before running any calculations. 
+
+------------------------------------------------------------

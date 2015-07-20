@@ -1,0 +1,390 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Modeling the quantum system</TITLE>
+<META NAME="description" CONTENT="Modeling the quantum system">
+<META NAME="keywords" CONTENT="phi_ug">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="phi_ug.css">
+
+<LINK REL="next" HREF="node4.html">
+<LINK REL="previous" HREF="node2.html">
+<LINK REL="up" HREF="node2.html">
+<LINK REL="next" HREF="node4.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html97"
+  HREF="node4.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.gif"></A> 
+<A NAME="tex2html93"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.gif"></A> 
+<A NAME="tex2html87"
+  HREF="node2.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.gif"></A> 
+<A NAME="tex2html95"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html98"
+  HREF="node4.html">Correlation functions</A>
+<B> Up:</B> <A NAME="tex2html94"
+  HREF="node2.html">Introduction and theory</A>
+<B> Previous:</B> <A NAME="tex2html88"
+  HREF="node2.html">Introduction and theory</A>
+ &nbsp; <B>  <A NAME="tex2html96"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00021000000000000000">
+Modeling the quantum system</A>
+</H2>
+To describe the input parameters for <TT>PHI</TT>, first the model of the quantum system has to be specified.
+The quantum system is described by a total Hamiltonian 
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+H_T = H_S + H_B + H_{SB}  + H_{ren},
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="238" HEIGHT="30" BORDER="0"
+ SRC="img1.gif"
+ ALT="\begin{displaymath}
+H_T = H_S + H_B + H_{SB} + H_{ren},
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(1)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where <IMG
+ WIDTH="29" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.gif"
+ ALT="$H_S$"> describes the system of interest, <IMG
+ WIDTH="30" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img3.gif"
+ ALT="$H_B$"> the thermal environment, <IMG
+ WIDTH="39" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img4.gif"
+ ALT="$H_{SB}$"> the system-environment coupling, and <IMG
+ WIDTH="41" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img5.gif"
+ ALT="$H_{ren}$"> is a renormalization term (specified below) dependent on the system-environment coupling. 
+The system Hamiltonian describes states <!-- MATH
+ ${\left| i \right>}$
+ -->
+<IMG
+ WIDTH="22" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img6.gif"
+ ALT="${\left\vert i \right&gt;}$">, <IMG
+ WIDTH="97" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img7.gif"
+ ALT="$i=1,\cdots,N$"> with energies <IMG
+ WIDTH="23" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img8.gif"
+ ALT="$E_i$"> and interaction <IMG
+ WIDTH="26" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img9.gif"
+ ALT="$V_{ij}$"> as
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+H_S  = \sum_{i=1}^N {\left| i \right>}{\left< i \right|} E_i + \sum_{i\ne j=1}^{N} V_{ij}{\left| i \right>}{\left< j \right|},
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="255" HEIGHT="64" BORDER="0"
+ SRC="img10.gif"
+ ALT="\begin{displaymath}
+H_S = \sum_{i=1}^N {\left\vert i \right&gt;}{\left&lt; i \right\ve...
+...e j=1}^{N} V_{ij}{\left\vert i \right&gt;}{\left&lt; j \right\vert},
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(2)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+The environment is modeled as an infinite set of harmonic oscillators with
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+H_B = \sum_\xi \frac{p_\xi^2}{2m_\xi} + \frac{m_\xi\omega_\xi^2q_\xi^2}{2}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="193" HEIGHT="61" BORDER="0"
+ SRC="img11.gif"
+ ALT="\begin{displaymath}
+H_B = \sum_\xi \frac{p_\xi^2}{2m_\xi} + \frac{m_\xi\omega_\xi^2q_\xi^2}{2}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(3)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+The system-environment coupling is assumed to be linear given by
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+H_{SB} = \sum_{a=1}^M F_a \sum_\xi c_{a\xi}q_\xi = \sum_{a=1}^M F_a u_a,
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="266" HEIGHT="64" BORDER="0"
+ SRC="img12.gif"
+ ALT="\begin{displaymath}
+H_{SB} = \sum_{a=1}^M F_a \sum_\xi c_{a\xi}q_\xi = \sum_{a=1}^M F_a u_a,
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(4)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where <!-- MATH
+ $F_a = \sum_{i,j=}^N f_{aij} {{\left| i \right>}{\left< j \right|}}$
+ -->
+<IMG
+ WIDTH="159" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img13.gif"
+ ALT="$F_a = \sum_{i,j=}^N f_{aij} {{\left\vert i \right&gt;}{\left&lt; j \right\vert}} $"> specifies the exact form of the coupling. At present only diagonal forms of <IMG
+ WIDTH="24" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.gif"
+ ALT="$F_a$"> are implemented in <TT>PHI</TT>, such that <!-- MATH
+ ${f_{aij} = \delta_{ij}\;f_{ai}}$
+ -->
+<IMG
+ WIDTH="100" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img15.gif"
+ ALT="$ {f_{aij} = \delta_{ij}\;f_{ai}} $">. In the present implementation only three types of <IMG
+ WIDTH="24" HEIGHT="32" ALIGN="MIDDLE" BORDER="0"
+ SRC="img14.gif"
+ ALT="$F_a$"> are allowed:
+
+<OL>
+<LI>diagonal, independent coupling: <IMG
+ WIDTH="62" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img16.gif"
+ ALT="$M=N$">, <!-- MATH
+ $F_a={{\left| a \right>}{\left< a \right|}}$
+ -->
+<IMG
+ WIDTH="88" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img17.gif"
+ ALT="$F_a={{\left\vert a \right&gt;}{\left&lt; a \right\vert}}$">
+</LI>
+<LI>diagonal, independent coupling: <IMG
+ WIDTH="62" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img18.gif"
+ ALT="$M\ne N$">, <!-- MATH
+ $F_a =  {{\left| i_a \right>}{\left< i_a \right|}}$
+ -->
+<IMG
+ WIDTH="98" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img19.gif"
+ ALT="$F_a = {{\left\vert i_a \right&gt;}{\left&lt; i_a \right\vert}}$"> for <!-- MATH
+ $i_a \in \left\{1,\cdots,N\right\}$
+ -->
+<IMG
+ WIDTH="120" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img20.gif"
+ ALT="$i_a \in \left\{1,\cdots,N\right\}$">.
+</LI>
+<LI>diagonal, correlated coupling:    <IMG
+ WIDTH="62" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img16.gif"
+ ALT="$M=N$">, <!-- MATH
+ $F_a = \sum_{i=1}^N f_{ai}{{\left| i \right>}{\left< i \right|}}$
+ -->
+<IMG
+ WIDTH="147" HEIGHT="42" ALIGN="MIDDLE" BORDER="0"
+ SRC="img21.gif"
+ ALT="$F_a = \sum_{i=1}^N f_{ai}{{\left\vert i \right&gt;}{\left&lt; i \right\vert}}$">
+</LI>
+</OL>
+The coupling introduces a shift in the bath coordinates <IMG
+ WIDTH="19" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img22.gif"
+ ALT="$q_\xi$"> that needs to be countered with the renormalization term 
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+H_{ren} = \sum_{a,b=1}^M F_{a} F_{b} \sum_\xi \frac{c_{a\xi} c_{b\xi}}{2 m_\xi \omega_\xi^2}.
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="222" HEIGHT="64" BORDER="0"
+ SRC="img23.gif"
+ ALT="\begin{displaymath}
+H_{ren} = \sum_{a,b=1}^M F_{a} F_{b} \sum_\xi \frac{c_{a\xi} c_{b\xi}}{2 m_\xi \omega_\xi^2}.
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(5)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Note that the renormalization term is NOT added to the system Hamiltonian in <TT>PHI</TT> - this is left up to the user to include in the Hamiltonian section of the input parameters.
+<TT>PHI</TT> implements the HEOM to calculate the system density matrix <IMG
+ WIDTH="33" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img24.gif"
+ ALT="$\rho(t)$"> averaged over environmental fluctuations
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\rho(t) = \left< W(t) \right>_B,
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="123" HEIGHT="32" BORDER="0"
+ SRC="img25.gif"
+ ALT="\begin{displaymath}
+\rho(t) = \left&lt; W(t) \right&gt;_B,
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(6)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where <IMG
+ WIDTH="43" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img26.gif"
+ ALT="$W(t)$"> is the density matrix of the complete system + environment. The time evolution of <IMG
+ WIDTH="43" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img26.gif"
+ ALT="$W(t)$"> is formally calculated as
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+W(t) = e^{- i H_T / \hbar } W(0) e^{i H_T / \hbar },
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="213" HEIGHT="31" BORDER="0"
+ SRC="img27.gif"
+ ALT="\begin{displaymath}
+W(t) = e^{- i H_T / \hbar } W(0) e^{i H_T / \hbar },
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(7)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+Where <IMG
+ WIDTH="46" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img28.gif"
+ ALT="$W(0)$"> specifies the density matrix of the complete system at <IMG
+ WIDTH="43" HEIGHT="15" ALIGN="BOTTOM" BORDER="0"
+ SRC="img29.gif"
+ ALT="$t=0$">. Assuming that the environment is in thermal equilibrium and that initially the  system and environment are uncorrelated, the initial density matrix is given by
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+W(0) = \rho(0)\otimes R,
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="133" HEIGHT="31" BORDER="0"
+ SRC="img30.gif"
+ ALT="\begin{displaymath}
+W(0) = \rho(0)\otimes R,
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(8)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+where <!-- MATH
+ $R = \exp(-\beta H_B)/{\rm tr} _B\left\{{\exp(-\beta H_B)}\right\}$
+ -->
+<IMG
+ WIDTH="276" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img31.gif"
+ ALT="$R = \exp(-\beta H_B)/{\rm tr} _B\left\{{\exp(-\beta H_B)}\right\}$">, <IMG
+ WIDTH="30" HEIGHT="31" ALIGN="MIDDLE" BORDER="0"
+ SRC="img32.gif"
+ ALT="${\rm tr} _B$"> is the partial trace over bath coordinates and <IMG
+ WIDTH="68" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img33.gif"
+ ALT="$\beta=1/T$"> is the inverse temperature. The system density matrix evolution can be written as
+<BR>
+<DIV ALIGN="RIGHT">
+
+<!-- MATH
+ \begin{equation}
+\rho(t) = \left< e^{- i H_T / \hbar }  \rho(0) e^{i H_T / \hbar } \right>_B = {\rm tr} _B \left\{ e^{- i H_T / \hbar }\ \rho(0)\otimes R\ e^{i H_T / \hbar } \right\}
+\end{equation}
+ -->
+<TABLE WIDTH="100%" ALIGN="CENTER">
+<TR VALIGN="MIDDLE"><TD ALIGN="CENTER" NOWRAP><IMG
+ WIDTH="480" HEIGHT="39" BORDER="0"
+ SRC="img34.gif"
+ ALT="\begin{displaymath}
+\rho(t) = \left&lt; e^{- i H_T / \hbar } \rho(0) e^{i H_T / \hb...
+...i H_T / \hbar }\ \rho(0)\otimes R\ e^{i H_T / \hbar } \right\}
+\end{displaymath}"></TD>
+<TD WIDTH=10 ALIGN="RIGHT">
+(9)</TD></TR>
+</TABLE>
+<BR CLEAR="ALL"></DIV><P></P>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html97"
+  HREF="node4.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.gif"></A> 
+<A NAME="tex2html93"
+  HREF="node2.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.gif"></A> 
+<A NAME="tex2html87"
+  HREF="node2.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.gif"></A> 
+<A NAME="tex2html95"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html98"
+  HREF="node4.html">Correlation functions</A>
+<B> Up:</B> <A NAME="tex2html94"
+  HREF="node2.html">Introduction and theory</A>
+<B> Previous:</B> <A NAME="tex2html88"
+  HREF="node2.html">Introduction and theory</A>
+ &nbsp; <B>  <A NAME="tex2html96"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+http://www.ks.uiuc.edu/Research/phi
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,49 @@
+function [Supop] = redfield_lindblad_calc(H_e,Beta,Drude_modes,BO_modes)
+
+
+
+[H_el,H_vib,H_e,H_f,e_1,e_2,fock_space_rep,M_p,M_pfull] = ...
+    generate_ex_vib_ham2(H_e,om_vib,numvib,displ,mu,mdip,R,[]) 
+
+sz1 =  length(H_e) + length(H_f);
+sz2 =  length(H_vib);
+
+R_red = redfield_calc_2(H_e,H_f...
+            ,fock_space_rep,Beta,Drude_modes,[],BO_modes,[],[],true);
+
+[Lindblad_op] = Lindblad_op_gen(Beta,BO_modes,[],[],sz1,M_prj);
+
+LL = sqrt(length(Lindblad_op));
+R_red_op = zeros(LL^2); 
+temp = zeros(LL);
+cnt1 = 0; cnt2 = 1;
+for lp = 1:LL
+    
+    %iterate along one vibrational lvl
+    cnt1vib = cnt1vib+1;
+    if cnt1vib > sz2 
+        cnt1vib=1; cnt1 = cnt1+1;
+        if cnt1 > sz1
+            cnt1 = 1;  cnt2vib = cnt2vib+1;
+            if cnt2vib > sz2
+                cnt2vib = 1; cnt2 = cnt2+1;
+            end
+        end
+    end
+    temp = temp*0;
+   for a = 1:sz1 
+        for b = 1:sz1 
+            temp((a-1)*sz2+cnt1vib,(b-1)*sz2+cnt2vib) = R_red(cnt1,cnt2,a,b);
+        end
+   end
+
+    R_red_op(lp,:) = reshape(temp,1,sz1^2*sz2^2 ).';
+
+end
+
+
+
+
+L = -1i*sparse(kron(eye(length(H_ex_vib)),H_ex_vib)-kron(H_ex_vib.',eye(length(H_ex_vib))));
+
+Supop = L  - R_red_op + Lindblad_op;

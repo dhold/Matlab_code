@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Parameter file format</TITLE>
+<META NAME="description" CONTENT="Parameter file format">
+<META NAME="keywords" CONTENT="phi_ug">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2008">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="phi_ug.css">
+
+<LINK REL="next" HREF="node9.html">
+<LINK REL="previous" HREF="node7.html">
+<LINK REL="up" HREF="node7.html">
+<LINK REL="next" HREF="node9.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html161"
+  HREF="node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next" SRC="next.gif"></A> 
+<A NAME="tex2html157"
+  HREF="node7.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up.gif"></A> 
+<A NAME="tex2html151"
+  HREF="node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev.gif"></A> 
+<A NAME="tex2html159"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents" SRC="contents.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html162"
+  HREF="node9.html">System parameters</A>
+<B> Up:</B> <A NAME="tex2html158"
+  HREF="node7.html">Input Parameters</A>
+<B> Previous:</B> <A NAME="tex2html152"
+  HREF="node7.html">Input Parameters</A>
+ &nbsp; <B>  <A NAME="tex2html160"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H2><A NAME="SECTION00031000000000000000">
+Parameter file format</A>
+</H2>
+The input file has a few general formatting rules:
+
+<OL>
+<LI><TT>#</TT> at the start of a line specifies a comment.
+<BR>
+All comments have to be on separate lines.
+<BR></LI>
+<LI>Empty lines are ignored.
+<BR></LI>
+<LI>Scalar parameters are specified using
+<BR><TT>Parameter=value</TT>
+<BR>
+on one line.
+<BR></LI>
+<LI>Vector and matrix parameters are specified using
+<BR><TT>VectorParameter:</TT>
+<BR><TT>value1,value2,value3</TT>
+<BR>
+and
+<BR><TT>MatrixParameter:</TT>
+<BR><TT>value11,value12,value13</TT>
+<BR><TT>value21,value22,value23</TT>
+<BR><TT>value31,value32,value33</TT>
+<BR></LI>
+<LI>Complex numbers <IMG
+ WIDTH="48" HEIGHT="33" ALIGN="MIDDLE" BORDER="0"
+ SRC="img89.gif"
+ ALT="$a+ib$"> are input using <TT>(a,b)</TT>. E.g.
+<BR><TT>Parameter=(a,b)</TT>
+<BR></LI>
+<LI><TT>NumStates</TT> and <TT>NumCouplingTerms</TT> must be specified before any vector or matrix parameters can be input.
+<BR></LI>
+</OL>
+The following parameters MUST be specified in the input file to run <TT>PHI</TT>:
+
+<UL>
+<LI><TT>NumStates</TT>
+</LI>
+<LI><TT>HierarchyTruncation</TT>
+</LI>
+</UL>
+Although, specifying only those parameters will allow you to only check memory requirements or print a hierarchy. The minimum parameters for an integration calculation are
+
+<UL>
+<LI><TT>OutputFile</TT>
+</LI>
+<LI><TT>NumStates</TT>
+</LI>
+<LI><TT>HierarchyTruncation</TT>
+</LI>
+<LI><TT>Hamiltonian</TT>
+</LI>
+<LI><TT>InitialDensityMatrix</TT>
+</LI>
+<LI><TT>Lambda</TT>
+</LI>
+<LI><TT>Gamma</TT>
+</LI>
+<LI><TT>Timestep</TT>
+</LI>
+<LI><TT>Runlength</TT>
+</LI>
+</UL>
+
+<P>
+<BR><HR>
+<ADDRESS>
+http://www.ks.uiuc.edu/Research/phi
+</ADDRESS>
+</BODY>
+</HTML>

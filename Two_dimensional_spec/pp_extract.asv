@@ -1,0 +1,57 @@
+fle = matfile('saved_data\PPcd_with_HEOM_no_mode.mat');
+om1_rng = fle.om1_rng;  om1_mid = mean(om1_rng); dom_1 = om1_rng(2)-om1_rng(1);
+om3_rng = fle.om3_rng;  om3_mid = mean(om3_rng); dom_3 = om3_rng(2)-om3_rng(1);
+[t_scale]= inv_cm_unit_sys(0);
+
+R1 = squeeze(fle.R1(:,:,:,cmp));  
+R2 = squeeze(fle.R2(:,:,:,cmp));
+
+%% Load Rephasing and non rephasing
+tau = 150; tau = tau*t_scale/1000;
+t2_range = t2_range_fs*t_scale/1000;
+om_pump_rng = [1.2255,1.2400,1.2450,1.2500]; %pump values to consider
+
+GSB = zeros(length(om3_rng),length(t2_range),length(om_pump_rng));
+
+N1 = 101; N2 = 101; Nsd = 7;
+
+tprime_rng = tau*linspace(-Nsd,Nsd,N1); %time 
+om_rng = linspace(-Nsd,Nsd,N2)/tau; %freq, take NSD each way
+
+% Set up the integration step sizes in the x and y directions
+hx = 2*Nsd*tau/N1;
+hy = 2*Nsd/tau/N2;
+
+% define grid vectors
+
+[tt,ww] = meshgrid( tprime_rng ,om_rng );
+
+EE = @(t) exp(-t.^2/tau^2/2)/sqrt(sqrt(pi)*tau);
+EE2 = @(w) exp(-w.^2*tau^2/2)/sqrt(sqrt(pi)/tau);
+
+Efact1 = EE(tt).*EE2(ww).*exp(1i*tt.*ww);
+Efact2 = EE(tt).*EE2(ww).*exp(-1i*tt.*ww);
+
+for tau_lp = 1:length(t2_range)
+    t_sep = t2_range(tau_lp); 
+   % lg = t_sep - tprime_rng >= 0  & t_sep - tprime_rng <=max(t2_range) ;
+    for om3_lp = 1:length(om3_rng)
+        for om1_lp = 1:length(om_pump_rng)
+            om_u = om_pump_rng(om1_lp)-om1_mid;
+            
+            %load and interpolate to the correct range
+R1tmp = squeeze(R1(om3_lp,:,:));  
+R1tmp = interp2(t2_range,om1_rng-om1_mid,R1tmp,t_sep+tt,ww,'linear',0);
+R2tmp = squeeze(R2(om3_lp,:,:));
+R2tmp = interp2(t2_range,om1_rng-om1_mid,R2tmp,t_sep+tt,ww,'linear',0);
+
+U = Efact2.*R2tmp + Efact1.*R2tmp;
+
+GSB(om3_lp,tau_lp,om1_lp) = imag(simp2D(U,N1-1,N2-1,hx,hy)); %integrate over the range using simpsons rule
+
+        end
+    end
+end
+
+
+

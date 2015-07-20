@@ -1,0 +1,7 @@
+ssh -Y ucapdih@legion.rc.ucl.ac.uk 
+module unload compilers/intel/11.1/072
+module load compilers/gnu/4.6.3
+module load matlab/full/r2013a/8.1
+qrsh -l mem=4000M,h_rt=2:00:0
+
+cd Scratch/Matlab

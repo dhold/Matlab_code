@@ -1,0 +1,52 @@
+# PHI test case
+# ----------------
+# Two level system
+# - Independent, uncorrelated diagonal bath coupling
+# - Time non-local truncation
+# - Strongly coupled (300 cm-1)
+#
+# N = 2
+# M = 2
+# L_T = 10
+# K = 0
+#Name of output file
+OutputFile=TLS_TNL.txt
+#Standard verbosity
+verbose=1
+#Number of sites
+NumStates=2
+#Number of bath terms = number of sites 
+NumCouplingTerms=2
+#Temperature
+T=300.0
+#Hierarchy Truncation Level
+HierarchyTruncation=5
+#High Temp. Approx.
+MatsubaraTerms=0
+#Use time non-local truncation
+TL=0
+#tolerance for rkf45 adaptive integration
+RKF45tolerance=1e-4
+#minimum timestep for rkf45 adaptive integration
+RKF45mindt=1e-4
+#Hamiltonian (cm^-1)
+#Note the Hamiltonian renormalization
+# sum_m=1^M |m><m|lambda[m] is NOT included
+# in the code. It is added to the Hamiltonian here
+Hamiltonian:
+ ( 280.000000,0E+00 ) , ( 300.000000 , 0E+0 ) 
+300.000000,180.000000
+#initial density matrix
+InitialDensityMatrix:
+1.000000,0.000000
+0.000000,0.000000
+#bath response frequency (1/ps)
+gamma:
+10.0,10.0
+#reorganisation energy (cm^-1)
+lambda:
+ 180.0E+00000 , 180.0000 
+#timesteps in ps
+Timestep=1.00000E-03
+#total running time in ps
+Time=1.00000
